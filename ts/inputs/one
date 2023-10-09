@@ -1,6 +1,3 @@
- async function main() {
-
-    const buffer = `
 5794
 5879
 4899
@@ -2249,48 +2246,3 @@
 2010
 2244
 8805
-`
-    const result = findMostCaloriesElf(buffer) 
-    console.log(result);
-}
-
-function findMostCaloriesElf(buffer: string): number {
-    const char = buffer.split("");
-
-    const numbers: number[] = []
-    let number: string = ""
-    for (let i = 0; i < char.length; ++i) {
-        if (char[i] !== '\n') {
-            number += char[i]
-            continue
-        } 
-
-        numbers.push(parseInt(number))
-        number = ""
-    }
-
-    let sum = 0;
-    let biggerSum = 0;
-    let lo = 0;
-    for (let i = 0; i < numbers.length; ++i) {
-        if (Number.isNaN(numbers[i])) {
-            sum = numbers.slice(lo, i).reduce((partialSum, acc) => partialSum + acc, 0);
-            lo = i + 1;
-        }
-
-        if (i === numbers.length - 1){
-            sum = numbers.slice(lo, i + 1).reduce((partialSum, acc) => partialSum + acc, 0);
-
-        }
-
-        if (sum > biggerSum) {
-            biggerSum = sum;
-        }
-    }
-
-    return biggerSum;
-}
-
-main()
-
-
